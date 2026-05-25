@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="/layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<span layout:fragment="page-name">
+
+
+    my notes
+</span>
+
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-12" th:each="note :${notes}">
+            <div class="card">
+                <div class="card-body">
+                    <form th:action="@{/note/delete/{id}(id=${note.getId()})}" method="post">
+                        <input type="hidden" name="stickynoteid" th:value="${note.getStickynoteid()}"/>
+                        <h6 class="card-subtitle mb-2 text-muted">Created : <span th:text="${note.getCreatedat()}"></span></h6>
+                        <p class="card-text" th:text="${note.getNote()}"></p>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
